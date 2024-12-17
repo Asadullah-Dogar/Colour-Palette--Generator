@@ -1,0 +1,140 @@
+/* General Reset */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Modern gradient */
+    color: #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-weight: 600;
+    color: #fdfdfd;
+    margin: 0;
+}
+
+/* Main Container */
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Styles */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.file-label {
+    font-weight: 400;
+    color: #fdfdfd;
+    margin-bottom: 10px;
+}
+
+.file-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.submit-button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* Palette Section */
+.palette-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.palette-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.color-box {
+    height: 150px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.color-hex {
+    font-weight: 600;
+    font-size: 1rem;
+    color: inherit;
+}
+
+/* Error Message */
+.error {
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    text-align: center;
+    color: #fdfdfd;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+
+.image-preview-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
