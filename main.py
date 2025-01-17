@@ -3,6 +3,8 @@ from flask import Flask, request, render_template, url_for
 from werkzeug.utils import secure_filename
 from PIL import Image
 import numpy as np
+from io import BytesIO
+import base64
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -23,6 +25,25 @@ def is_light(hex_color):
     brightness = (r * 299 + g * 587 + b * 114) / 1000
     return brightness > 128
 
+
+
+# converting image to base 64 for In-Memoery processing
+#no need for file uploads
+
+def image_to_base64(image):
+    buffered = BytesIO()
+    image.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    return f"data:image/png;base64,{img_str}"
+
+# vercel given error for longer image processing hence function timeout error;
+# so i have added resize image function here to reduce image size before processing
+
+def resize_image(image, max_width=500):
+    img = image.copy()
+    img.thumbnail((max_width, max_width), Image.Resampling.LANCZOS)
+    return img
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_image():
     palette = None
@@ -38,16 +59,12 @@ def upload_image():
                 error = 'No selected file'
             elif file and allowed_file(file.filename):
                 try:
-                    # Save the uploaded file
-                    filename = secure_filename(file.filename)
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                    file.save(filepath)
+             
 
-                    # Store the uploaded image URL
-                    uploaded_image_url = url_for('static', filename=f'uploads/{filename}')
-
-                    # Process the image to extract the color palette
-                    img = Image.open(filepath).convert('RGB')
+               
+                    img = Image.open(file.stream).convert('RGB')
+                    img = resize_image(img)
+                    uploaded_image_url = image_to_base64(img)
                     img_data = np.array(img)
                     pixels = img_data.reshape(-1, 3)
                     unique_colors, counts = np.unique(pixels, axis=0, return_counts=True)
